@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Registros_Sanitarios_API.Models;
+namespace Registros_Sanitarios_API.Models.Entities;
 
 public partial class Paciente
 {
