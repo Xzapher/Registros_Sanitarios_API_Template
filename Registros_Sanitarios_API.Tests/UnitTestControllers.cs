@@ -1,6 +1,6 @@
 namespace Registros_Sanitarios_API.Tests
 {
-    public class UnitTest1
+    public class UnitTestControllers
     {
         [Fact]
         public void Test1()
