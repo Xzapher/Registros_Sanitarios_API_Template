@@ -2,12 +2,22 @@ using Microsoft.EntityFrameworkCore;
 using Registros_Sanitarios_API.Data;
 using Registros_Sanitarios_API.Repositories;
 using Registros_Sanitarios_API.Services;
+using log4net.Config;
+using log4net;
+using System.Reflection;
 
 internal class Program
 {
+    private static readonly ILog log = LogManager.GetLogger(typeof(Program));
+
     private static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+
+        var logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
+        XmlConfigurator.Configure(logRepository, new FileInfo("log4net.config"));
+
+        log.Info("Hello logging world!");
 
         // Add services to the container.
 
