@@ -5,6 +5,7 @@ using Registros_Sanitarios_API.Services;
 using log4net.Config;
 using log4net;
 using System.Reflection;
+using Registros_Sanitarios_API;
 
 internal class Program
 {
@@ -14,10 +15,16 @@ internal class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        var logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
-        XmlConfigurator.Configure(logRepository, new FileInfo("log4net.config"));
+        //var logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
+        //XmlConfigurator.Configure(logRepository, new FileInfo("log4net.config"));
 
-        log.Info("Hello logging world!");
+        Log4NetConfig.InitializeConfig();
+
+        log.Info("info test");
+        log.Debug("debug test");
+        log.Warn("warn test");
+        log.Error("error test");
+        log.Fatal("fatal test");
 
         // Add services to the container.
 
