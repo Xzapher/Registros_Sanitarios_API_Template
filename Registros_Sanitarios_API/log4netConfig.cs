@@ -6,6 +6,9 @@ namespace Registros_Sanitarios_API
 {
     public static class Log4NetConfig
     {
+
+        //private static readonly ILog log = LogManager.GetLogger(typeof(  -->[CLASSNAME]<--  ));
+
         public static void InitializeConfig()
         {
             var logRepository = LogManager.GetRepository(Assembly.GetEntryAssembly());
