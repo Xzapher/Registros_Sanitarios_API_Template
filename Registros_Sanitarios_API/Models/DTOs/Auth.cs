@@ -3,9 +3,7 @@ namespace Registros_Sanitarios_API.Models.DTOs
 {
     public class Auth
     {
-
-
-        public bool auth(string user, string pass)
+        public bool authJWT(string user, string pass)
         {
             throw new NotImplementedException();
         }

@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35913.81
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registros_Sanitarios_API", "Registros_Sanitarios_API\Registros_Sanitarios_API.csproj", "{A926FA0B-0EF4-4ECA-A75A-9BB7A92DB145}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registros_Sanitarios.API", "Registros_Sanitarios_API\Registros_Sanitarios.API.csproj", "{A926FA0B-0EF4-4ECA-A75A-9BB7A92DB145}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registros_Sanitarios_API.Tests", "Registros_Sanitarios_API.Tests\Registros_Sanitarios_API.Tests.csproj", "{C5564098-7115-4DEA-805B-0389801B8E57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registros_Sanitarios.Application", "Registros_Sanitarios.Application\Registros_Sanitarios.Application.csproj", "{235CD4F0-7755-4DEF-8E89-A5245C02EE51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registros_Sanitarios.Domain", "Registros_Sanitarios.Domain\Registros_Sanitarios.Domain.csproj", "{32BC17A9-DAB5-4F17-B0D4-9963EF77C440}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Registros_Sanitarios.Infrastructure", "Registros_Sanitarios.Infrastructure\Registros_Sanitarios.Infrastructure.csproj", "{DC95872E-6749-4A50-A8F9-D1C4A2A4B948}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,18 @@ Global
 		{C5564098-7115-4DEA-805B-0389801B8E57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5564098-7115-4DEA-805B-0389801B8E57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5564098-7115-4DEA-805B-0389801B8E57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{235CD4F0-7755-4DEF-8E89-A5245C02EE51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{235CD4F0-7755-4DEF-8E89-A5245C02EE51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{235CD4F0-7755-4DEF-8E89-A5245C02EE51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{235CD4F0-7755-4DEF-8E89-A5245C02EE51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32BC17A9-DAB5-4F17-B0D4-9963EF77C440}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32BC17A9-DAB5-4F17-B0D4-9963EF77C440}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32BC17A9-DAB5-4F17-B0D4-9963EF77C440}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32BC17A9-DAB5-4F17-B0D4-9963EF77C440}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC95872E-6749-4A50-A8F9-D1C4A2A4B948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC95872E-6749-4A50-A8F9-D1C4A2A4B948}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC95872E-6749-4A50-A8F9-D1C4A2A4B948}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC95872E-6749-4A50-A8F9-D1C4A2A4B948}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
