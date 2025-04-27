@@ -1,8 +1,5 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Registros_Sanitarios_API.Data;
-using Registros_Sanitarios_API.Models;
 using Registros_Sanitarios_API.Models.Entities;
 
 namespace Registros_Sanitarios_API.Repositories

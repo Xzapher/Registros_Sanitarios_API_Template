@@ -1,10 +1,8 @@
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Threading.Tasks;
 using log4net;
 using Microsoft.EntityFrameworkCore;
 using Registros_Sanitarios_API.Data;
 using Registros_Sanitarios_API.Models.Entities;
+using EntityState = Microsoft.EntityFrameworkCore.EntityState;
 
 namespace Registros_Sanitarios_API.Repositories
 {
@@ -13,6 +11,11 @@ namespace Registros_Sanitarios_API.Repositories
         private readonly RegistrosSanitariosContext _context;
 
         private static readonly ILog log = LogManager.GetLogger(typeof(HospitaleRepository));
+
+        public HospitaleRepository(RegistrosSanitariosContext context)
+        {
+            _context = context;
+        }
 
         /// Example method to demonstrate transaction handling
         public async Task<IEnumerable<Hospitale>> GetAllExample(Hospitale hospitale)
@@ -36,16 +39,11 @@ namespace Registros_Sanitarios_API.Repositories
 
         }
 
-
-        public HospitaleRepository(RegistrosSanitariosContext context)
-        {
-            _context = context;
-        }
-
         public async Task<IEnumerable<Hospitale>> GetAllAsync()
         {
             return await _context.Hospitales.ToListAsync();
         }
+
 
         public async Task<Hospitale> GetByIdAsync(int id)
         {
