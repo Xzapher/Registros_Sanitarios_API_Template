@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using Registros_Sanitarios_API.Models.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using RegistrosSanitarios.Domain.Entities;
 
-namespace Registros_Sanitarios_API.Data;
+namespace RegistrosSanitarios.Infrastructure.Data;
 
 public partial class RegistrosSanitariosContext : DbContext
 {

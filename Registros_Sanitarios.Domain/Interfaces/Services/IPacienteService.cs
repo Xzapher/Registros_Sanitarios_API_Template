@@ -1,8 +1,6 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Registros_Sanitarios_API.Models.Entities;
+using RegistrosSanitarios.Domain.Entities;
 
-namespace Registros_Sanitarios_API.Services
+namespace RegistrosSanitarios.Domain.Services
 {
     public interface IPacienteService
     {
@@ -11,6 +9,6 @@ namespace Registros_Sanitarios_API.Services
         Task AddAsync(Paciente paciente);
         Task UpdateAsync(Paciente paciente);
         Task DeleteAsync(int id);
-        Task<bool> ExistsAsync(int id); // Add this line
+        Task<bool> ExistsAsync(int id);
     }
 }

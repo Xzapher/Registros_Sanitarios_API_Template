@@ -1,9 +1,6 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Registros_Sanitarios_API.Models;
-using Registros_Sanitarios_API.Models.Entities;
+using RegistrosSanitarios.Domain.Entities;
 
-namespace Registros_Sanitarios_API.Services
+namespace RegistrosSanitarios.Domain.Services
 {
     public interface IHospitaleService
     {
@@ -12,6 +9,6 @@ namespace Registros_Sanitarios_API.Services
         Task AddAsync(Hospitale hospitale);
         Task UpdateAsync(Hospitale hospitale);
         Task DeleteAsync(int id);
-        Task<bool> ExistsAsync(int id); // Add this line
+        Task<bool> ExistsAsync(int id);
     }
 }

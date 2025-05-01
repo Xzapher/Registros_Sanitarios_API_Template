@@ -1,12 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Registros_Sanitarios_API.Models;
-using Registros_Sanitarios_API.Models.Entities;
-using Registros_Sanitarios_API.Services;
+using RegistrosSanitarios.Domain.Entities;
+using RegistrosSanitarios.Domain.Services;
 
-namespace Registros_Sanitarios_API.Controllers
+namespace RegistrosSanitarios.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -1,9 +1,8 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Registros_Sanitarios_API.Models.Entities;
-using Registros_Sanitarios_API.Repositories;
+using RegistrosSanitarios.Domain.Entities;
+using RegistrosSanitarios.Domain.Repositories;
+using RegistrosSanitarios.Domain.Services;
 
-namespace Registros_Sanitarios_API.Services
+namespace RegistrosSanitarios.Application.Services
 {
     public class PacienteService : IPacienteService
     {

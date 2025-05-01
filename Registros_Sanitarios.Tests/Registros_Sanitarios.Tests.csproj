@@ -18,7 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Registros_Sanitarios_API\Registros_Sanitarios.Api.csproj" />
+    <ProjectReference Include="..\Registros_Sanitarios.API\Registros_Sanitarios.Api.csproj" />
+    <ProjectReference Include="..\Registros_Sanitarios.Domain\Registros_Sanitarios.Domain.csproj" />
+    <ProjectReference Include="..\Registros_Sanitarios.API\Registros_Sanitarios.Api.csproj" />
   </ItemGroup>
 
   <ItemGroup>

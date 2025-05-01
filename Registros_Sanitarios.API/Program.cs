@@ -1,11 +1,11 @@
-using Microsoft.EntityFrameworkCore;
-using Registros_Sanitarios_API.Data;
-using Registros_Sanitarios_API.Repositories;
-using Registros_Sanitarios_API.Services;
-using log4net.Config;
 using log4net;
-using System.Reflection;
-using Registros_Sanitarios_API;
+using Microsoft.EntityFrameworkCore;
+using RegistrosSanitarios.API.Log4Net;
+using RegistrosSanitarios.Application.Services;
+using RegistrosSanitarios.Domain.Repositories;
+using RegistrosSanitarios.Domain.Services;
+using RegistrosSanitarios.Infrastructure.Data;
+using RegistrosSanitarios.Infrastructure.Repositories;
 
 internal class Program
 {

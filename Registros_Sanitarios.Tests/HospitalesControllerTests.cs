@@ -1,13 +1,10 @@
-using Xunit;
-using Moq;
 using Microsoft.AspNetCore.Mvc;
-using Registros_Sanitarios_API.Controllers;
-using Registros_Sanitarios_API.Models.Entities;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Registros_Sanitarios_API.Services;
+using Moq;
+using RegistrosSanitarios.API.Controllers;
+using RegistrosSanitarios.Domain.Entities;
+using RegistrosSanitarios.Domain.Services;
 
-namespace Registros_Sanitarios_API.Tests
+namespace RegistrosSanitarios.Tests.HospitalesControllerTests
 {
     public class HospitalesControllerTests
     {

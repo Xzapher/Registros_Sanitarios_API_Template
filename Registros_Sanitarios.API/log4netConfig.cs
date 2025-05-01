@@ -1,8 +1,8 @@
-﻿using log4net.Config;
+﻿using System.Reflection;
 using log4net;
-using System.Reflection;
+using log4net.Config;
 
-namespace Registros_Sanitarios_API
+namespace RegistrosSanitarios.API.Log4Net
 {
     public static class Log4NetConfig
     {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Registros_Sanitarios_API.Models.Entities;
-
+﻿namespace RegistrosSanitarios.Domain.Entities;
 public partial class Paciente
 {
     public int Id { get; set; }
