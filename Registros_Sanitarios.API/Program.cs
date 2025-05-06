@@ -1,9 +1,7 @@
 using log4net;
 using Microsoft.EntityFrameworkCore;
 using RegistrosSanitarios.API.Log4Net;
-using RegistrosSanitarios.Application.Services;
 using RegistrosSanitarios.Domain.Repositories;
-using RegistrosSanitarios.Domain.Services;
 using RegistrosSanitarios.Infrastructure.Data;
 using RegistrosSanitarios.Infrastructure.Repositories;
 
@@ -32,16 +30,18 @@ internal class Program
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddMediatR(cfg =>
+            {
+                cfg.RegisterServicesFromAssembly(typeof(CreateHospitalHandler).Assembly);
+            });
+
             // Add Entity Framework Core and SQL Server
             builder.Services.AddDbContext<RegistrosSanitariosContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             // Add Dependency Injection for Repositories and Services
             builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
-            builder.Services.AddScoped<IPacienteService, PacienteService>();
-
-            builder.Services.AddScoped<IHospitaleRepository, HospitaleRepository>();
-            builder.Services.AddScoped<IHospitaleService, HospitaleService>();
+            builder.Services.AddScoped<IHospitalRepository, HospitalRepository>();
 
             var app = builder.Build();
 

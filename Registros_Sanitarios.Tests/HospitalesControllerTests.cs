@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using RegistrosSanitarios.API.Controllers;
 using RegistrosSanitarios.Domain.Entities;
-using RegistrosSanitarios.Domain.Services;
 
 namespace RegistrosSanitarios.Tests.HospitalesControllerTests
 {
@@ -11,22 +10,22 @@ namespace RegistrosSanitarios.Tests.HospitalesControllerTests
         [Fact]
         public async Task GetAll_ReturnsOkResult_WithListOfHospitales()
         {
-            var mockService = new Mock<IHospitaleService>();
+            var mockService = new Mock<IHospitalService>();
             mockService
                 .Setup(service => service.GetAllAsync())
-                .ReturnsAsync(new List<Hospitale>
+                .ReturnsAsync(new List<Hospital>
                 {
-                    new Hospitale { Id = 1, Nombre = "Hospital A" },
-                    new Hospitale { Id = 2, Nombre = "Hospital B" }
+                    new Hospital { Id = 1, Nombre = "Hospital A" },
+                    new Hospital { Id = 2, Nombre = "Hospital B" }
                 });
 
             var controller = new HospitalesController(mockService.Object);
 
             var result = await controller.GetHospitales();
 
-            var actionResult = Assert.IsType<ActionResult<IEnumerable<Hospitale>>>(result);
+            var actionResult = Assert.IsType<ActionResult<IEnumerable<Hospital>>>(result);
             var okResult = Assert.IsType<OkObjectResult>(actionResult.Result);
-            var hospitales = Assert.IsType<List<Hospitale>>(okResult.Value);
+            var hospitales = Assert.IsType<List<Hospital>>(okResult.Value);
             Assert.Equal(2, hospitales.Count);
         }
     }

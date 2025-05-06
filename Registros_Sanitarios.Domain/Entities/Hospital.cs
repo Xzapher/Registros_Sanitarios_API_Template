@@ -1,6 +1,6 @@
 ﻿namespace RegistrosSanitarios.Domain.Entities;
 
-public partial class Hospitale
+public partial class Hospital
 {
     public int Id { get; set; }
 

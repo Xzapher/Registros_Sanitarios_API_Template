@@ -7,19 +7,19 @@ using EntityState = Microsoft.EntityFrameworkCore.EntityState;
 
 namespace RegistrosSanitarios.Infrastructure.Repositories;
 
-public class HospitaleRepository : IHospitaleRepository
+public class HospitalRepository : IHospitalRepository
 {
     private readonly RegistrosSanitariosContext _context;
 
-    private static readonly ILog log = LogManager.GetLogger(typeof(HospitaleRepository));
+    private static readonly ILog log = LogManager.GetLogger(typeof(HospitalRepository));
 
-    public HospitaleRepository(RegistrosSanitariosContext context)
+    public HospitalRepository(RegistrosSanitariosContext context)
     {
         _context = context;
     }
 
     /// Example method to demonstrate transaction handling
-    public async Task<IEnumerable<Hospitale>> GetAllExample(Hospitale hospitale)
+    public async Task<IEnumerable<Hospital>> GetAllExample(Hospital hospital)
     {
         using var transaction = await _context.Database.BeginTransactionAsync();
         try
@@ -40,35 +40,35 @@ public class HospitaleRepository : IHospitaleRepository
 
     }
 
-    public async Task<IEnumerable<Hospitale>> GetAllAsync()
+    public async Task<IEnumerable<Hospital>> GetAllAsync()
     {
         return await _context.Hospitales.ToListAsync();
     }
 
 
-    public async Task<Hospitale> GetByIdAsync(int id)
+    public async Task<Hospital> GetByIdAsync(int id)
     {
         return await _context.Hospitales.FindAsync(id);
     }
 
-    public async Task AddAsync(Hospitale hospitale)
+    public async Task AddAsync(Hospital hospital)
     {
-        await _context.Hospitales.AddAsync(hospitale);
+        await _context.Hospitales.AddAsync(hospital);
         await _context.SaveChangesAsync();
     }
 
-    public async Task UpdateAsync(Hospitale hospitale)
+    public async Task UpdateAsync(Hospital hospital)
     {
-        _context.Entry(hospitale).State = EntityState.Modified;
+        _context.Entry(hospital).State = EntityState.Modified;
         await _context.SaveChangesAsync();
     }
 
     public async Task DeleteAsync(int id)
     {
-        var hospitale = await _context.Hospitales.FindAsync(id);
-        if (hospitale != null)
+        var hospital = await _context.Hospitales.FindAsync(id);
+        if (hospital != null)
         {
-            _context.Hospitales.Remove(hospitale);
+            _context.Hospitales.Remove(hospital);
             await _context.SaveChangesAsync();
         }
     }

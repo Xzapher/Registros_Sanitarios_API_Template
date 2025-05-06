@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Registros_Sanitarios.Application.CQRS.Commands.Hospitales.CreateHospital;
 using RegistrosSanitarios.Domain.Entities;
-using RegistrosSanitarios.Domain.Services;
+using RegistrosSanitarios.Domain.Repositories;
 
 namespace RegistrosSanitarios.API.Controllers
 {
@@ -9,46 +11,49 @@ namespace RegistrosSanitarios.API.Controllers
     [ApiController]
     public class HospitalesController : ControllerBase
     {
-        private readonly IHospitaleService _hospitaleService;
+        private readonly IHospitalRepository _hospitalRepository;
 
-        public HospitalesController(IHospitaleService hospitaleService)
+        private readonly IMediator _mediator;
+
+        public HospitalesController(IHospitalRepository hospitalRepository, IMediator mediator)
         {
-            _hospitaleService = hospitaleService;
+            _hospitalRepository = hospitalRepository;
+            _mediator = mediator;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Hospitale>>> GetHospitales()
+        public async Task<ActionResult<IEnumerable<Hospital>>> GetHospitales()
         {
-            var hospitales = await _hospitaleService.GetAllAsync();
+            var hospitales = await _hospitalRepository.GetAllAsync();
             return Ok(hospitales);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Hospitale>> GetHospitale(int id)
+        public async Task<ActionResult<Hospital>> GetHospital(int id)
         {
-            var hospitale = await _hospitaleService.GetByIdAsync(id);
-            if (hospitale == null)
+            var hospital = await _hospitalRepository.GetByIdAsync(id);
+            if (hospital == null)
             {
                 return NotFound();
             }
-            return Ok(hospitale);
+            return Ok(hospital);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutHospitale(int id, Hospitale hospitale)
+        public async Task<IActionResult> PutHospital(int id, Hospital hospital)
         {
-            if (id != hospitale.Id)
+            if (id != hospital.Id)
             {
                 return BadRequest();
             }
 
             try
             {
-                await _hospitaleService.UpdateAsync(hospitale);
+                await _hospitalRepository.UpdateAsync(hospital);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!await _hospitaleService.ExistsAsync(id))
+                if (!await _hospitalRepository.ExistsAsync(id))
                 {
                     return NotFound();
                 }
@@ -62,22 +67,22 @@ namespace RegistrosSanitarios.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Hospitale>> PostHospitale(Hospitale hospitale)
+        public async Task<IActionResult> PostHospital([FromBody] CreateHospitalCommand command)
         {
-            await _hospitaleService.AddAsync(hospitale);
-            return CreatedAtAction("GetHospitale", new { id = hospitale.Id }, hospitale);
+            var id = await _mediator.Send(command);
+            return Ok(id);
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteHospitale(int id)
+        public async Task<IActionResult> DeleteHospital(int id)
         {
-            var hospitale = await _hospitaleService.GetByIdAsync(id);
-            if (hospitale == null)
+            var hospital = await _hospitalRepository.GetByIdAsync(id);
+            if (hospital == null)
             {
                 return NotFound();
             }
 
-            await _hospitaleService.DeleteAsync(id);
+            await _hospitalRepository.DeleteAsync(id);
             return NoContent();
         }
     }

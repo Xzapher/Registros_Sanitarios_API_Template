@@ -1,4 +1,5 @@
 ﻿namespace RegistrosSanitarios.Domain.Entities;
+
 public partial class Paciente
 {
     public int Id { get; set; }
@@ -11,5 +12,5 @@ public partial class Paciente
 
     public string RazonConsulta { get; set; } = null!;
 
-    public virtual Hospitale Hospital { get; set; } = null!;
+    public virtual Hospital Hospital { get; set; } = null!;
 }

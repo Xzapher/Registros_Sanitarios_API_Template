@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RegistrosSanitarios.Domain.Entities;
-using RegistrosSanitarios.Domain.Services;
+using RegistrosSanitarios.Domain.Repositories;
 
 namespace RegistrosSanitarios.API.Controllers
 {
@@ -9,24 +9,24 @@ namespace RegistrosSanitarios.API.Controllers
     [ApiController]
     public class PacientesController : ControllerBase
     {
-        private readonly IPacienteService _pacienteService;
+        private readonly IPacienteRepository _pacienteRepository;
 
-        public PacientesController(IPacienteService pacienteService)
+        public PacientesController(IPacienteRepository pacienteRepository)
         {
-            _pacienteService = pacienteService;
+            _pacienteRepository = pacienteRepository;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Paciente>>> GetPacientes()
         {
-            var pacientes = await _pacienteService.GetAllAsync();
+            var pacientes = await _pacienteRepository.GetAllAsync();
             return Ok(pacientes);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Paciente>> GetPaciente(int id)
         {
-            var paciente = await _pacienteService.GetByIdAsync(id);
+            var paciente = await _pacienteRepository.GetByIdAsync(id);
             if (paciente == null)
             {
                 return NotFound();
@@ -44,11 +44,11 @@ namespace RegistrosSanitarios.API.Controllers
 
             try
             {
-                await _pacienteService.UpdateAsync(paciente);
+                await _pacienteRepository.UpdateAsync(paciente);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!await _pacienteService.ExistsAsync(id))
+                if (!await _pacienteRepository.ExistsAsync(id))
                 {
                     return NotFound();
                 }
@@ -64,20 +64,20 @@ namespace RegistrosSanitarios.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Paciente>> PostPaciente(Paciente paciente)
         {
-            await _pacienteService.AddAsync(paciente);
+            await _pacienteRepository.AddAsync(paciente);
             return CreatedAtAction("GetPaciente", new { id = paciente.Id }, paciente);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePaciente(int id)
         {
-            var paciente = await _pacienteService.GetByIdAsync(id);
+            var paciente = await _pacienteRepository.GetByIdAsync(id);
             if (paciente == null)
             {
                 return NotFound();
             }
 
-            await _pacienteService.DeleteAsync(id);
+            await _pacienteRepository.DeleteAsync(id);
             return NoContent();
         }
     }

@@ -10,7 +10,7 @@ public partial class RegistrosSanitariosContext : DbContext
     {
     }
 
-    public virtual DbSet<Hospitale> Hospitales { get; set; }
+    public virtual DbSet<Hospital> Hospitales { get; set; }
 
     public virtual DbSet<Paciente> Pacientes { get; set; }
 
@@ -19,7 +19,7 @@ public partial class RegistrosSanitariosContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Hospitale>(entity =>
+        modelBuilder.Entity<Hospital>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Hospital__3214EC075C53FD00");
 
