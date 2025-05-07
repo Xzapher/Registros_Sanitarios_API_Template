@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Registros_Sanitarios.Application.CQRS.Commands.Hospitales.CreateHospital;
+using RegistrosSanitarios.Application.CQRS.Commands.Hospitales;
+using RegistrosSanitarios.Application.CQRS.Queries.Hospitales;
 using RegistrosSanitarios.Domain.Entities;
 using RegistrosSanitarios.Domain.Repositories;
 
@@ -24,65 +24,46 @@ namespace RegistrosSanitarios.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Hospital>>> GetHospitales()
         {
-            var hospitales = await _hospitalRepository.GetAllAsync();
+            var hospitales = await _mediator.Send(new GetAllHospitalesQuery());
             return Ok(hospitales);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Hospital>> GetHospital(int id)
+        public async Task<ActionResult<Hospital>> GetHospitalById(int id)
         {
-            var hospital = await _hospitalRepository.GetByIdAsync(id);
-            if (hospital == null)
-            {
-                return NotFound();
-            }
+            var hospital = await _mediator.Send(new GetHospitalByIdQuery(id));
+            if (hospital == null) return NotFound();
             return Ok(hospital);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutHospital(int id, Hospital hospital)
+        public async Task<IActionResult> EditHospital(int id, [FromBody] UpdateHospitalCommand command)
         {
-            if (id != hospital.Id)
-            {
-                return BadRequest();
-            }
+            if (id != command.Id) return BadRequest("ID mismatch");
 
-            try
-            {
-                await _hospitalRepository.UpdateAsync(hospital);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!await _hospitalRepository.ExistsAsync(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            var success = await _mediator.Send(command);
+            if (!success) return NotFound();
             return NoContent();
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostHospital([FromBody] CreateHospitalCommand command)
+        public async Task<IActionResult> CreateHospital([FromBody] CreateHospitalCommand command)
         {
             var id = await _mediator.Send(command);
             return Ok(id);
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteHospital(int id)
+        public async Task<IActionResult> DeleteHospital(int id, CancellationToken ct)
         {
-            var hospital = await _hospitalRepository.GetByIdAsync(id);
-            if (hospital == null)
-            {
-                return NotFound();
-            }
+            if (id <= 0)
+                return BadRequest("ID inválido");
 
-            await _hospitalRepository.DeleteAsync(id);
+            var success = await _mediator.Send(new DeleteHospitalCommand(id), ct);
+
+            if (!success)
+                return NotFound("Hospital no encontrado o no se puede eliminar");
+
             return NoContent();
         }
     }

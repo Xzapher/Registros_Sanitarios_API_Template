@@ -1,6 +1,7 @@
 using log4net;
 using Microsoft.EntityFrameworkCore;
 using RegistrosSanitarios.API.Log4Net;
+using RegistrosSanitarios.Application.CQRS.Commands.Hospitales;
 using RegistrosSanitarios.Domain.Repositories;
 using RegistrosSanitarios.Infrastructure.Data;
 using RegistrosSanitarios.Infrastructure.Repositories;
@@ -30,10 +31,22 @@ internal class Program
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+
+            // esto tengo que cambiar como se registran los servicios CQRS
             builder.Services.AddMediatR(cfg =>
             {
                 cfg.RegisterServicesFromAssembly(typeof(CreateHospitalHandler).Assembly);
             });
+
+            //builder.Services.AddMediatR(cfg =>
+            //{
+            //    cfg.RegisterServicesFromAssembly(typeof(CreateHospitalHandler).Assembly);
+            //    cfg.RegisterServicesFromAssembly(typeof(DeleteHospitalHandler).Assembly);
+            //    cfg.RegisterServicesFromAssembly(typeof(UpdateHospitalHandler).Assembly);
+
+            //    cfg.RegisterServicesFromAssembly(typeof(GetAllHospitalesHandler).Assembly);
+            //    cfg.RegisterServicesFromAssembly(typeof(GetHospitalByIdHandler).Assembly);
+            //});
 
             // Add Entity Framework Core and SQL Server
             builder.Services.AddDbContext<RegistrosSanitariosContext>(options =>

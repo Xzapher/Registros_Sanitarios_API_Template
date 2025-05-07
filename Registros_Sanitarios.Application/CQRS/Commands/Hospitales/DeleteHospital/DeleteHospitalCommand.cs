@@ -2,5 +2,5 @@
 
 namespace RegistrosSanitarios.Application.CQRS.Commands.Hospitales
 {
-    public record CreateHospitalCommand(string Nombre) : IRequest<int>;
+    public record DeleteHospitalCommand(int Id) : IRequest<bool>;
 }

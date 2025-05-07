@@ -40,41 +40,46 @@ public class HospitalRepository : IHospitalRepository
 
     }
 
-    public async Task<IEnumerable<Hospital>> GetAllAsync()
+    public async Task<IEnumerable<Hospital>> GetHospitalesAsync()
     {
         return await _context.Hospitales.ToListAsync();
     }
 
 
-    public async Task<Hospital> GetByIdAsync(int id)
+    public async Task<Hospital> GetHospitalByIdAsync(int id)
     {
         return await _context.Hospitales.FindAsync(id);
     }
 
-    public async Task AddAsync(Hospital hospital)
+    public async Task AddHospitalAsync(Hospital hospital)
     {
         await _context.Hospitales.AddAsync(hospital);
         await _context.SaveChangesAsync();
     }
 
-    public async Task UpdateAsync(Hospital hospital)
+    public async Task EditHospitalAsync(Hospital hospital)
     {
         _context.Entry(hospital).State = EntityState.Modified;
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteAsync(int id)
+    public async Task DeleteHospitalAsync(int id, CancellationToken ct)
     {
-        var hospital = await _context.Hospitales.FindAsync(id);
-        if (hospital != null)
-        {
-            _context.Hospitales.Remove(hospital);
-            await _context.SaveChangesAsync();
-        }
+        var hospital = new Hospital { Id = id };
+        _context.Hospitales.Attach(hospital);
+        _context.Hospitales.Remove(hospital);
+        await _context.SaveChangesAsync(ct);
     }
 
     public async Task<bool> ExistsAsync(int id)
     {
         return await _context.Hospitales.AnyAsync(e => e.Id == id);
+    }
+
+    public async Task<Hospital?> GetByIdWithPacientesAsync(int id, CancellationToken ct)
+    {
+        return await _context.Hospitales
+        .Include(h => h.Pacientes)
+        .FirstOrDefaultAsync(h => h.Id == id, ct);
     }
 }

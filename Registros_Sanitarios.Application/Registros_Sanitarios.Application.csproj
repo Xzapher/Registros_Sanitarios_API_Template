@@ -14,4 +14,9 @@
     <ProjectReference Include="..\Registros_Sanitarios.Domain\Registros_Sanitarios.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CQRS\Commands\Pacientes\" />
+    <Folder Include="CQRS\Queries\Pacientes\" />
+  </ItemGroup>
+
 </Project>
