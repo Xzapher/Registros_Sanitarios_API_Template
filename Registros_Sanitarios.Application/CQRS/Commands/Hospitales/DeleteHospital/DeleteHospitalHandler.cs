@@ -18,8 +18,9 @@ namespace RegistrosSanitarios.Application.CQRS.Commands.Hospitales
             if (hospital == null || hospital.Pacientes.Any())
                 return false;
 
-            await _repo.DeleteHospitalAsync(request.Id, cancellationToken);
+            await _repo.DeleteHospitalAsync(hospital, cancellationToken); // pasa la entidad directamente
             return true;
         }
+
     }
 }

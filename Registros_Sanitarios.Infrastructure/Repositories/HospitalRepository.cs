@@ -63,13 +63,12 @@ public class HospitalRepository : IHospitalRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteHospitalAsync(int id, CancellationToken ct)
+    public async Task DeleteHospitalAsync(Hospital hospital, CancellationToken ct)
     {
-        var hospital = new Hospital { Id = id };
-        _context.Hospitales.Attach(hospital);
-        _context.Hospitales.Remove(hospital);
+        _context.Hospitales.Remove(hospital); // ya está trackeado
         await _context.SaveChangesAsync(ct);
     }
+
 
     public async Task<bool> ExistsAsync(int id)
     {

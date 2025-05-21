@@ -8,7 +8,7 @@ namespace RegistrosSanitarios.Domain.Repositories
         Task<Hospital> GetHospitalByIdAsync(int id);
         Task AddHospitalAsync(Hospital hospital);
         Task EditHospitalAsync(Hospital hospital);
-        Task DeleteHospitalAsync(int id, CancellationToken ct);
+        Task DeleteHospitalAsync(Hospital hospital, CancellationToken ct);
         Task<bool> ExistsAsync(int id);
         Task<Hospital?> GetByIdWithPacientesAsync(int id, CancellationToken ct);
     }
